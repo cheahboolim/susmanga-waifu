@@ -17,7 +17,7 @@ export default function NotReadyPage() {
         Our voting polls have been closed for now, please visit SUSMANGA.COM to find out more.
       </p>
       <Link href="/presusmanga">
-        <Button className="px-4 py-2 bg-white text-black rounded border hover:bg-gray-200 disabled:opacity-50 font-semibold transition-colors w-[80%]">
+        <Button className="bg-pink-cta text-white hover:bg-pink-DEFAULT text-xl px-10 py-5 rounded-full shadow-lg transition-colors w-full max-w-md">
           Learn More
         </Button>
       </Link>

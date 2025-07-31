@@ -10,7 +10,7 @@ export default function PresusmangaPage() {
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href="https://susmanga.com" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-pink-cta text-white hover:bg-pink-DEFAULT text-xl px-10 py-5 rounded-full shadow-lg transition-colors w-full sm:w-auto">
+          <Button className="bg-pink-cta text-white hover:bg-pink-DEFAULT text-xl px-10 py-5 rounded-full shadow-lg transition-colors w-full max-w-md">
             Visit SUSMANGA.COM
           </Button>
         </Link>

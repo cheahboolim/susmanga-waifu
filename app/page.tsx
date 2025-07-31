@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-8 p-4 md:p-8 max-w-3xl w-full">
-      <h1 className="text-3xl md:text-5xl font-bold text-pink-DEFAULT leading-tight">
+      <h1 className="text-3xl md:text-4xl font-bold text-pink-DEFAULT leading-tight">
         Top 50 Waifu of {currentMonth} voted by Susmanga.com Readers
       </h1>
       <Link href="/waifu/50" className="block w-full max-w-md">
@@ -28,7 +28,7 @@ export default function HomePage() {
         />
       </Link>
       <Link href="/waifu/50">
-        <Button className="bg-pink-cta text-white hover:bg-pink-DEFAULT text-xl px-10 py-5 rounded-full shadow-lg transition-colors">
+        <Button className="bg-pink-cta text-white hover:bg-pink-DEFAULT text-xl px-10 py-5 rounded-full shadow-lg transition-colors w-full max-w-md">
           Start Reading
         </Button>
       </Link>

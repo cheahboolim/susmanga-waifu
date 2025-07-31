@@ -78,6 +78,10 @@ export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCard
             </Button>
           </Link>
         </div>
+        {/* Add the advertisement box below the navigation buttons */}
+        <div className="w-[300px] h-[300px] bg-muted border-2 border-pink-DEFAULT flex items-center justify-center text-center text-muted-foreground text-sm rounded-lg mt-4">
+          <p>Advertisement Box (300x300)</p>
+        </div>
       </CardFooter>
     </Card>
   )
