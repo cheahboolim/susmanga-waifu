@@ -12,12 +12,12 @@ interface WaifuCardProps {
   totalWaifus: number
 }
 
-export default function WaifuCard({ waifu, currentPage, totalWaifuData }: WaifuCardProps) {
+export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCardProps) {
   const nextWaifuRank = currentPage - 1
   const prevWaifuRank = currentPage + 1
 
   const hasNext = nextWaifuRank >= 1
-  const hasPrevious = prevWaifuRank <= totalWaifuData
+  const hasPrevious = prevWaifuRank <= totalWaifus
 
   return (
     <Card className="w-full max-w-md bg-black border-pink-DEFAULT shadow-lg rounded-lg overflow-hidden">
@@ -79,7 +79,7 @@ export default function WaifuCard({ waifu, currentPage, totalWaifuData }: WaifuC
             </Button>
           </Link>
         </div>
-        {/* Replace placeholder with HighPerformanceAd */}
+        {/* HighPerformanceAd is placed here, within the CardFooter */}
         <div className="w-[300px] h-[300px] flex items-center justify-center mx-auto mt-4">
           <HighPerformanceAd />
         </div>
