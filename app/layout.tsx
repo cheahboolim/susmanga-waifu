@@ -11,7 +11,23 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "SUSMANGA.COM Waifu Ranking",
   description: "Top Waifu rankings by Susmanga readers.",
-    generator: 'v0.dev'
+  generator: "v0.dev",
+  openGraph: {
+    title: "SUSMANGA.COM Waifu Ranking",
+    description: "Discover the Top 50 Waifu voted by Susmanga.com Readers!",
+    url: "https://susmanga.com", // Replace with your actual domain
+    siteName: "SUSMANGA.COM",
+    images: [
+      {
+        url: "/placeholder.svg?height=630&width=1200", // Placeholder for your OG image
+        width: 1200,
+        height: 630,
+        alt: "SUSMANGA.COM Waifu Ranking",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 }
 
 export default function RootLayout({
