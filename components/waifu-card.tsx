@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { ThumbsUp, ThumbsDown } from "lucide-react"
 import type { Waifu } from "@/lib/waifu-data"
+import HighPerformanceAd from "@/components/ui/Ads/HighPerformanceAd" // Import HighPerformanceAd
 
 interface WaifuCardProps {
   waifu: Waifu
@@ -11,12 +12,12 @@ interface WaifuCardProps {
   totalWaifus: number
 }
 
-export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCardProps) {
+export default function WaifuCard({ waifu, currentPage, totalWaifuData }: WaifuCardProps) {
   const nextWaifuRank = currentPage - 1
   const prevWaifuRank = currentPage + 1
 
   const hasNext = nextWaifuRank >= 1
-  const hasPrevious = prevWaifuRank <= totalWaifus
+  const hasPrevious = prevWaifuRank <= totalWaifuData
 
   return (
     <Card className="w-full max-w-md bg-black border-pink-DEFAULT shadow-lg rounded-lg overflow-hidden">
@@ -78,9 +79,9 @@ export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCard
             </Button>
           </Link>
         </div>
-        {/* Add the advertisement box below the navigation buttons */}
-        <div className="w-[300px] h-[300px] bg-muted border-2 border-pink-DEFAULT flex items-center justify-center text-center text-muted-foreground text-sm rounded-lg mt-4">
-          <p>Advertisement Box (300x300)</p>
+        {/* Replace placeholder with HighPerformanceAd */}
+        <div className="w-[300px] h-[300px] flex items-center justify-center mx-auto mt-4">
+          <HighPerformanceAd />
         </div>
       </CardFooter>
     </Card>
