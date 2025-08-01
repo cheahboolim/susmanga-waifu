@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-8 p-4 md:p-8 max-w-3xl w-full">
       <h1 className="text-3xl md:text-4xl font-bold text-pink-DEFAULT leading-tight">
-        Top 50 Waifu of {currentMonth} voted by Susmanga.com Readers
+        Top 51 Waifu of {currentMonth} voted by Susmanga.com Readers
       </h1>
       <h2 className="text-3xl md:text-4xl font-bold text-pink-DEFAULT leading-tight">
         No. 51 Boa Hancock (One Piece)

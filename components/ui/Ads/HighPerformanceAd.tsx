@@ -2,69 +2,46 @@
 
 import { useEffect, useRef } from 'react';
 
-declare global {
-  interface Window {
-    atOptions: any;
-  }
-}
-
 export default function HighPerformanceAd() {
   const adRef = useRef<HTMLDivElement>(null);
-  const scriptLoadedRef = useRef(false);
+  const loadedRef = useRef(false);
 
   useEffect(() => {
-    if (!adRef.current || scriptLoadedRef.current) return;
+    if (loadedRef.current || !adRef.current) return;
 
-    // Create a unique container ID for this ad instance
-    const containerId = `ad-container-${Math.random().toString(36).substr(2, 9)}`;
-    adRef.current.id = containerId;
-
-    // Set the ad options on window object
-    window.atOptions = {
-      'key': '859ce865eafad0dfd961277e055d4058',
-      'format': 'iframe',
-      'height': 250,
-      'width': 300,
-      'params': {}
-    };
-
-    // Create the script to invoke the ad
+    // Create a wrapper div that will contain both scripts and serve as ad container
+    const adContainer = adRef.current;
+    
+    // First script: Set the options exactly as in the original
+    const optionsScript = document.createElement('script');
+    optionsScript.type = 'text/javascript';
+    optionsScript.text = `
+      atOptions = {
+        'key' : '859ce865eafad0dfd961277e055d4058',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    `;
+    
+    // Second script: Load the invoke script exactly as in the original
     const invokeScript = document.createElement('script');
     invokeScript.type = 'text/javascript';
-    invokeScript.async = true;
     invokeScript.src = '//www.highperformanceformat.com/859ce865eafad0dfd961277e055d4058/invoke.js';
     
-    invokeScript.onload = () => {
-      // Try to move the ad content to our container after it loads
-      setTimeout(() => {
-        const adElements = document.querySelectorAll('iframe[src*="highperformanceformat.com"]');
-        const lastAdElement = adElements[adElements.length - 1];
-        
-        if (lastAdElement && adRef.current && !adRef.current.contains(lastAdElement)) {
-          // Move the iframe to our container
-          adRef.current.appendChild(lastAdElement);
-          
-          // Style the iframe to fit properly
-          (lastAdElement as HTMLElement).style.width = '100%';
-          (lastAdElement as HTMLElement).style.height = '100%';
-          (lastAdElement as HTMLElement).style.border = 'none';
-        }
-      }, 1000);
-    };
-
-    // Append to document head to avoid body pollution
-    document.head.appendChild(invokeScript);
-    scriptLoadedRef.current = true;
+    // Append both scripts to our container
+    adContainer.appendChild(optionsScript);
+    adContainer.appendChild(invokeScript);
+    
+    loadedRef.current = true;
 
     return () => {
-      // Clean up
+      // Clean up - remove scripts from container
       if (adRef.current) {
         adRef.current.innerHTML = '';
       }
-      // Remove script from head
-      const scripts = document.head.querySelectorAll('script[src*="highperformanceformat.com"]');
-      scripts.forEach(script => script.remove());
-      scriptLoadedRef.current = false;
+      loadedRef.current = false;
     };
   }, []);
 
@@ -74,23 +51,13 @@ export default function HighPerformanceAd() {
       style={{ 
         width: 300, 
         height: 250,
-        overflow: 'hidden',
-        position: 'relative',
-        border: '1px solid #ccc', // Visual boundary for debugging
-        backgroundColor: '#f9f9f9' // Light background to see the container
+        display: 'block',
+        margin: '0 auto',
+        minHeight: 250 // Ensure container has minimum height
       }}
       className="ad-container"
     >
-      <div style={{ 
-        position: 'absolute', 
-        top: '50%', 
-        left: '50%', 
-        transform: 'translate(-50%, -50%)',
-        color: '#666',
-        fontSize: '12px'
-      }}>
-        Loading ad...
-      </div>
+      {/* Scripts and ad content will be inserted here */}
     </div>
   );
 }
