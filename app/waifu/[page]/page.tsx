@@ -1,5 +1,6 @@
 import { waifuData } from "@/lib/waifu-data"
 import WaifuCard from "@/components/waifu-card"
+import ExoClickAd from "@/components/ui/Ads/ExoClickAd"
 import { notFound } from "next/navigation"
 
 interface WaifuPageProps {
@@ -24,9 +25,9 @@ export default function WaifuPage({ params }: WaifuPageProps) {
   return (
     <div className="flex flex-col items-center justify-center p-4 md:p-8 w-full">
       <WaifuCard waifu={waifu} currentPage={pageNum} totalWaifus={waifuData.length} />
-      
-      {/* Additional ad placement outside the card if needed */}
-      <div className="mt-8">
+
+      <div className="mt-8 w-full max-w-xl">
+        <ExoClickAd />
       </div>
     </div>
   )
