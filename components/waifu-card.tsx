@@ -1,10 +1,12 @@
+"use client" // This component needs to be a client component for window.location and navigator.share
+
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { ThumbsUp, ThumbsDown } from "lucide-react"
+import { ThumbsUp, ThumbsDown, Twitter, Facebook, Share2 } from "lucide-react" // Import share icons
 import type { Waifu } from "@/lib/waifu-data"
-import HighPerformanceAd from "@/components/ui/Ads/HighPerformanceAd" // Import HighPerformanceAd
+import HighPerformanceAd from "@/components/ui/Ads/HighPerformanceAd"
 
 interface WaifuCardProps {
   waifu: Waifu
@@ -18,6 +20,13 @@ export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCard
 
   const hasNext = nextWaifuRank >= 1
   const hasPrevious = prevWaifuRank <= totalWaifus
+
+  // Dynamic URL for sharing based on the current waifu page
+  const currentUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/waifu/${waifu.id}`
+      : `https://susmanga.com/waifu/${waifu.id}`
+  const shareText = `Check out No. ${waifu.id} ${waifu.name} in the Top 50 Waifu rankings on SUSMANGA.COM!`
 
   return (
     <Card className="w-full max-w-md bg-black border-pink-DEFAULT shadow-lg rounded-lg overflow-hidden">
@@ -79,7 +88,58 @@ export default function WaifuCard({ waifu, currentPage, totalWaifus }: WaifuCard
             </Button>
           </Link>
         </div>
-        {/* HighPerformanceAd is placed here, within the CardFooter */}
+        {/* Share buttons moved here */}
+        <div className="flex items-center gap-2 mt-4 justify-center w-full">
+          <span className="text-sm text-pink-DEFAULT">Share:</span>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-pink-DEFAULT hover:bg-pink-DEFAULT/20"
+            onClick={() =>
+              window.open(
+                `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`,
+                "_blank",
+              )
+            }
+            aria-label="Share on Twitter"
+          >
+            <Twitter className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-pink-DEFAULT hover:bg-pink-DEFAULT/20"
+            onClick={() =>
+              window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, "_blank")
+            }
+            aria-label="Share on Facebook"
+          >
+            <Facebook className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-pink-DEFAULT hover:bg-pink-DEFAULT/20"
+            onClick={() => {
+              if (navigator.share) {
+                navigator
+                  .share({
+                    title: "SUSMANGA.COM Waifu Ranking",
+                    text: shareText,
+                    url: currentUrl,
+                  })
+                  .catch((error) => console.error("Error sharing:", error))
+              } else {
+                // Fallback for browsers that don't support navigator.share
+                alert("Please copy the URL to share: " + currentUrl)
+              }
+            }}
+            aria-label="Share this page"
+          >
+            <Share2 className="h-5 w-5" />
+          </Button>
+        </div>
+        {/* HighPerformanceAd remains below the share buttons */}
         <div className="w-[300px] h-[300px] flex items-center justify-center mx-auto mt-4">
           <HighPerformanceAd />
         </div>

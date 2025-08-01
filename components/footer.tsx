@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Twitter, Facebook, Share2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Twitter, Facebook, Share2 } from "lucide-react" // Re-import share icons
+import { Button } from "@/components/ui/button" // Re-import Button
 
 export default function Footer() {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "https://susmanga.com" // Fallback for server-side rendering
