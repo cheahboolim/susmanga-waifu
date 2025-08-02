@@ -22,6 +22,9 @@ export default function Footer() {
         <Link href="/" className="text-sm text-pink-DEFAULT hover:text-pink-DEFAULT/80 transition-colors">
           Waifu List
         </Link>
+        <Link href="/prehome" className="text-sm text-pink-DEFAULT hover:text-pink-DEFAULT/80 transition-colors">
+          Prehome
+        </Link>
       </div>
       <div className="flex items-center gap-2">
         <span className="text-sm text-pink-DEFAULT">Share:</span>
