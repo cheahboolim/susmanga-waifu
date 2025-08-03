@@ -1,6 +1,6 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import HighPerformanceAd from "@/components/ui/Ads/HighPerformanceAd" // Import the HighPerformanceAd component
 
 export default function NotReadyPage() {
   return (
@@ -14,6 +14,10 @@ export default function NotReadyPage() {
           Learn More
         </Button>
       </Link>
+      {/* HighPerformanceAd is placed below the "Learn More" button */}
+      <div className="w-[300px] h-[300px] flex items-center justify-center mx-auto mt-8">
+        <HighPerformanceAd />
+      </div>
     </div>
   )
 }
